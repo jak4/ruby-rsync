@@ -3,6 +3,8 @@ require 'rsync/change'
 module Rsync
   # The result of a sync.
   class Result
+    attr_reader :cmd
+
     # Error messages by exit code
     ERROR_CODES = {
       "0" => "Success",
@@ -28,9 +30,10 @@ module Rsync
     }
 
     # @!visibility private
-    def initialize(raw, exitcode)
+    def initialize(raw, exitcode, cmd=nil)
       @raw = raw
       @exitcode = exitcode
+      @cmd = cmd
     end
 
     # Whether the rsync job was run without errors.
