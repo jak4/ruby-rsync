@@ -30,7 +30,7 @@ module Rsync
 
       pre_rsync_cmnds = create_pre_rsync_cmnds(args, source, destination)
       post_rsync_cmnds = create_post_rsync_cmnds(args, source, destination)
-      rsync = "rsync --itemize-changes #{source} #{destination} #{args.join(" ")}"
+      rsync = "rsync --itemize-changes -razplr --delete --delete-excluded #{source} #{destination} #{args.join(" ")}"
 
       rsync = pre_rsync_cmnds ? pre_rsync_cmnds + " && " + rsync : rsync
       rsync = post_rsync_cmnds ? rsync + " && " + post_rsync_cmnds : rsync
